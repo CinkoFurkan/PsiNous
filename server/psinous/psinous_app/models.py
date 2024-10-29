@@ -20,3 +20,11 @@ class Sublink(models.Model):
     def __str__(self):
         return self.name
 
+class About(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255)
+    text= models.TextField()
+
+    def __str__(self):
+        return self.name
+    

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Link, Sublink
+from .models import Link, Sublink, About
 from django.utils.encoding import smart_str
 
 # Create your views here.
@@ -18,4 +18,11 @@ def titles(request):
         }for link in links]
     }
 
+    return Response(smart_str(content), status=status.HTTP_200_OK, content_type="application/json; charset=utf-8")
+
+@api_view(["GET"])
+def about(request):
+    about = About.objects.all()
+    content = [i.text for i in about]
+        
     return Response(smart_str(content), status=status.HTTP_200_OK, content_type="application/json; charset=utf-8")
