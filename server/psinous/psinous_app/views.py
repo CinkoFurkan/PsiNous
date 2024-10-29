@@ -23,6 +23,11 @@ def titles(request):
 @api_view(["GET"])
 def about(request):
     about = About.objects.all()
-    content = [i.text for i in about]
+    content = {
+        "about" : [{
+            "text" : i.text,
+            "image": i.image
+        }for i in about]
+    }
         
     return Response(smart_str(content), status=status.HTTP_200_OK, content_type="application/json; charset=utf-8")
