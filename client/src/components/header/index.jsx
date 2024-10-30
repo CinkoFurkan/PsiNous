@@ -9,9 +9,10 @@ const Header = () => {
   return (
     <header className='flex items-center justify-between p-4 text-black'>
       <Logo />
-      <Links />
+      <Links links={links} /> 
       <Social />
     </header>
   );
 };
+
 export default Header;
