@@ -1,15 +1,24 @@
 import { FaInstagram } from 'react-icons/fa';
+import { FaLinkedin } from "react-icons/fa6";
 
 const Social = () => {
   return (
-    <div>
+    <div className="flex items-center space-x-4">
       <a
         href="https://www.instagram.com/psinouss/profilecard/?igsh=M2J3bG95czFhdWVy"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-gray-500 hover:text-gray-700"
+        className="hover:text-[#bc090b] transition duration-200"
       >
         <FaInstagram size={24} />
+      </a>
+      <a
+        href="https://www.instagram.com/psinouss/profilecard/?igsh=M2J3bG95czFhdWVy"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover:text-[#0b65c2] transition duration-200"
+      >
+        <FaLinkedin size={24} />
       </a>
     </div>
   );

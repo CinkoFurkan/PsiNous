@@ -23,6 +23,7 @@ def about(request):
     content = {
         "about": [{
             "text": i.text,
+            "title": i.title,
             "image": i.image.url if i.image else None
         } for i in about]
     }

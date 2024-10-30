@@ -1,9 +1,11 @@
-import Header from './components/header';
+import Home from './pages/home';
 
 export default function App() {
   return (
-    <h1 className='mx-auto w-1200px bg-[#fbf8f3] h-screen w-screen'>
-      <Header />
-    </h1>
+    <div className='bg-[#f4efe6] h-screen w-screen'>
+      <div className=''>
+        <Home />
+    </div>
+    </div>
   );
 }

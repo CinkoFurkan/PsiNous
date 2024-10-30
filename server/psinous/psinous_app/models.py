@@ -23,6 +23,7 @@ class Sublink(models.Model):
 class About(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
+    title = models.CharField(max_length=30,blank=True, null=True)
     text= models.TextField()
     image = models.ImageField(upload_to='about/', blank=True, null=True)
 
