@@ -2,7 +2,8 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Link, Sublink, About
+from .models import Link, Sublink, About, Event, Announcement
+from django.utils import timezone
 
 # API views
 
@@ -26,6 +27,36 @@ def about(request):
             "title": i.title,
             "image": i.image.url if i.image else None
         } for i in about]
+    }
+    
+    return Response(content, status=status.HTTP_200_OK) 
+
+@api_view(["GET"])
+def event(request):
+    event = Event.objects.all()
+    content = {
+        "event": [{
+            "title": i.title,
+            "description": i.description,
+            "location" : i.location,
+            "registration_link": i.registration_link,
+            "event_date" : timezone.localtime(i.event_date),
+            "is_active" : i.is_active,
+            "image": i.image.url if i.image else None
+        } for i in event]
+    }
+    
+    return Response(content, status=status.HTTP_200_OK)   
+
+@api_view(["GET"])
+def announcement(request):
+    announcement = Announcement.objects.all()
+    content = {
+        "announcement": [{
+            "title": i.title,
+            "text": i.text,
+            "image": i.image.url if i.image else None
+        } for i in announcement]
     }
     
     return Response(content, status=status.HTTP_200_OK)  
