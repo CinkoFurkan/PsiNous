@@ -9,7 +9,7 @@ urlpatterns = [
     path('api/about/', about, name='about'),
     path('api/event/', event, name='event'),
     path('api/announcement/', announcement, name='announcement')
-    #ath('api/announcement/', announcement, name='announcement')
+    ##ath('api/announcement/', announcement, name='announcement')
 ]
 
 if settings.DEBUG:
