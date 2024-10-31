@@ -81,7 +81,7 @@ def member(request):
         "members": [{
             "first_name": i.first_name,
             "last_name": i.last_name,
-            "team": i.team.title if i.team else None,  # Access the related Team title directly
+            "team": i.team.title if i.team else None,
             "title": i.title,
             "bio": i.bio,
             "linked_in": i.linkedin if i.linkedin else None,
@@ -92,6 +92,23 @@ def member(request):
     
     return Response(content, status=status.HTTP_200_OK)
 
+
 @api_view(["GET"])
-def member(request):
-    blogs = Blog
+def blog(request):
+    blogs = Blog.objects.all()
+    content = {
+        "blogs" :  [{
+            "title": i.title,
+            "short_text": i.short_text,
+            "text": i.text,
+            "writer_f": i.writer.first_name,
+            "writer_l": i.writer.last_name,
+            "writer_title": i.writer.title,
+            "writer_image": i.writer.image.url,
+            "created_at": i.created_at,
+            "updated_at": i.updated_at,
+            "is_published": i.is_published,
+            "image": i.image.url if i.image else None
+        } for i in blogs]
+    }
+    return Response(content, status=status.HTTP_200_OK)
