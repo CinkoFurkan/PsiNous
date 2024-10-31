@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Button from '../button';
 
 const Subscription = () => {
@@ -17,7 +17,7 @@ const Subscription = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-[400px] px-4 py-2 border border-primary outline-none focus:border-[1.5px]"
+            className='w-[400px] px-4 py-2 border border-primary outline-none focus:border-[1.5px]'
             placeholder='E-mail adresiniz'
           />
         </div>
