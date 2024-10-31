@@ -3,10 +3,10 @@ from django.contrib import admin
 from .models import Link, Sublink, About, Event, Announcement
 
 class linkAdmin(admin.ModelAdmin):
-    list_display = ("name", "is_active")
+    list_display = ("name", "is_active", "position")
 
 class sublinkAdmin(admin.ModelAdmin):
-    list_display = ("name", "link", "is_active")
+    list_display = ("name", "link", "is_active", "position")
 
 class aboutAdmin(admin.ModelAdmin):
     list_display = ("name", "text")

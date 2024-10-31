@@ -5,7 +5,7 @@ const Social = () => {
   return (
     <div className="flex items-center space-x-4">
       <a
-        href="https://www.instagram.com/psinouss/profilecard/?igsh=M2J3bG95czFhdWVy"
+        href="https://www.instagram.com/psinouss?igsh=M2J3bG95czFhdWVy"
         target="_blank"
         rel="noopener noreferrer"
         className="hover:text-[#bc090b] transition duration-200"
@@ -13,7 +13,7 @@ const Social = () => {
         <FaInstagram size={24} />
       </a>
       <a
-        href="https://www.instagram.com/psinouss/profilecard/?igsh=M2J3bG95czFhdWVy"
+        href="https://www.linkedin.com/company/psinous/"
         target="_blank"
         rel="noopener noreferrer"
         className="hover:text-[#0b65c2] transition duration-200"
