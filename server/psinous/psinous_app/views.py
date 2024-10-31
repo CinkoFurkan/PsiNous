@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Link, Sublink, About, Event, Announcement
+from .models import Link, Sublink, About, Event, Announcement, Team, Member, Blog
 from django.utils import timezone
 
 # API views
@@ -61,3 +61,37 @@ def announcement(request):
     
     return Response(content, status=status.HTTP_200_OK)  
 
+@api_view(["GET"])
+def team(request):
+    team_infos = Team.objects.all()
+    content = {
+        "team_infos": [{
+            "title": i.title,
+            "description": i.description,
+            "image": i.image.url if i.image else None
+        } for i in team_infos]
+    }
+    
+    return Response(content, status=status.HTTP_200_OK)
+
+@api_view(["GET"])
+def member(request):
+    members = Member.objects.all()
+    content = {
+        "members": [{
+            "first_name": i.first_name,
+            "last_name": i.last_name,
+            "team": i.team.title if i.team else None,  # Access the related Team title directly
+            "title": i.title,
+            "bio": i.bio,
+            "linked_in": i.linkedin if i.linkedin else None,
+            "email": i.email if i.email else None,
+            "image": i.image.url if i.image else None
+        } for i in members]
+    }
+    
+    return Response(content, status=status.HTTP_200_OK)
+
+@api_view(["GET"])
+def member(request):
+    blogs = Blog

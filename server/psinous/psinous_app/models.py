@@ -60,5 +60,38 @@ class Announcement(models.Model):
 
     def __str__(self):
         return self.title
-    
-    
+
+class Team(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    image = models.ImageField(upload_to='teams/', blank=True, null=True)
+
+
+    def __str__(self):
+        return self.title
+
+class Member(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, related_name='members')
+    title = models.CharField(max_length=50)
+    bio = models.TextField(blank=True, null=True)
+    linkedin = models.URLField(max_length=200)
+    email = models.EmailField(blank=True, null=True)
+    image = models.ImageField(upload_to='members/', blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
+class Blog(models.Model):
+    title = models.CharField(max_length=255)
+    short_text = models.TextField()
+    text = models.TextField()
+    writer = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='blogs')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    is_published = models.BooleanField(default=True)
+    image = models.ImageField(upload_to='blogs/', blank=True, null=True)
+
+    def __str__(self):
+        return self.title
