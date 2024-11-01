@@ -83,6 +83,7 @@ def member(request):
             "first_name": i.first_name,
             "last_name": i.last_name,
             "team": i.team.title if i.team else None,
+            "team_id": i.team.id if i.team else None,
             "title": i.title,
             "bio": i.bio,
             "linked_in": i.linkedin if i.linkedin else None,

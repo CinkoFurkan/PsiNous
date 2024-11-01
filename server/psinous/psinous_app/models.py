@@ -62,8 +62,10 @@ class Announcement(models.Model):
         return self.title
 
 class Team(models.Model):
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     description = models.TextField()
+    year = models.CharField(max_length=255,blank=True, null=True)
     image = models.ImageField(upload_to='teams/', blank=True, null=True)
 
 
@@ -71,6 +73,7 @@ class Team(models.Model):
         return self.title
 
 class Member(models.Model):
+    id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, related_name='members')
@@ -84,6 +87,7 @@ class Member(models.Model):
         return f"{self.first_name} {self.last_name}"
 
 class Blog(models.Model):
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255)
     short_text = models.TextField()
     text = models.TextField()
