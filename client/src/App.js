@@ -8,6 +8,7 @@ import Blog from './pages/blog';
 import Announcement from './pages/announcement';
 import Galery from './pages/galery';
 import Contact from './pages/contact';
+import Footer from './components/footer';
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
           <Route path='/galeri' element={<Galery />} />
           <Route path='/İletişim' element={<Contact />} />
         </Routes>
+        <Footer />
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ const useFetch = (url) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(url);
+        const { data } = await axios.get(`/psinous_app/api/${url}`);
         setData(data);
       } catch (error) {
         console.log(error.message);
