@@ -1,4 +1,5 @@
-import Button from '../../../button';
+import Button from '../../../../../../components/button';
+import { Link } from 'react-router-dom';
 
 const Description = ({ data }) => {
   return (
@@ -11,7 +12,7 @@ const Description = ({ data }) => {
       </div>
       <div>
         <div className='flex items-center justify-center'>
-          <Button as='a' variant='primary' size='normal'>
+          <Button as={Link} to='/biz Kimiz?' variant='primary' size='normal'>
             Daha Fazla
           </Button>
         </div>

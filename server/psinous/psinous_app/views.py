@@ -6,6 +6,7 @@ from .models import Link, Sublink, About, Event, Announcement, Team, Member, Blo
 from django.utils import timezone
 
 # API views
+#ibo was here
 
 @api_view(["GET"])
 def titles(request):

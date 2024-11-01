@@ -1,10 +1,9 @@
-import React from 'react';
-import useFetch from '../../hooks/get';
+import useFetch from '../../../../hooks/get';
 import Description from './components/desc';
 import Image from './components/image';
 
 const About = () => {
-  const { data } = useFetch('psinous_app/api/about/');
+  const { data } = useFetch('/about/');
 
   return data && data.about ? (
     <div className='flex items-center justify-center w-full p-8 mt-20'>

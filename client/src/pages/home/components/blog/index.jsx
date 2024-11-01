@@ -1,10 +1,10 @@
-import useFetch from '../../hooks/get';
+import useFetch from '../../../../hooks/get';
 import Image from './components/image';
 import Info from './components/info';
 import Extra from './components/extra';
 
 const Blog = () => {
-  const { data } = useFetch('psinous_app/api/blog');
+  const { data } = useFetch('/blog');
 
   return data && data.blogs ? (
     <div className='flex flex-col items-center w-full p-8 mt-10'>

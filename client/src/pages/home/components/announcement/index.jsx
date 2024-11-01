@@ -1,5 +1,5 @@
 import React from 'react';
-import useFetch from '../../hooks/get';
+import useFetch from '../../../../hooks/get';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -7,7 +7,7 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
 const Announcement = () => {
-  const { data } = useFetch('psinous_app/api/announcement');
+  const { data } = useFetch('/announcement');
 
   return data && data.announcement ? (
     <div className='flex flex-col items-center w-full p-6 mt-16 space-y-6'>
