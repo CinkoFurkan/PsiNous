@@ -1,16 +1,17 @@
 import { useParams } from 'react-router-dom';
 import useFetch from '../../hooks/get';
+import { FaLinkedin } from 'react-icons/fa6';
+import { IoMail } from 'react-icons/io5';
 
 const MemberDetail = () => {
   const { id } = useParams();
   const { data, loading, error } = useFetch(`member_info/${id}`);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error fetching member details.</div>;
-  if (!data || !data.member) return <div>Member not found.</div>;
+  if (loading) return <div className="text-center p-8">Loading...</div>;
+  if (error) return <div className="text-center p-8">Error fetching member details.</div>;
+  if (!data || !data.member) return <div className="text-center p-8">Member not found.</div>;
 
   const {
-    member_id,
     first_name,
     last_name,
     team,
@@ -19,63 +20,75 @@ const MemberDetail = () => {
     bio,
     linked_in,
     email,
-    image
+    image,
   } = data.member;
 
   return (
-    <div className="flex flex-col items-center p-10 text-center bg-gray-100 rounded-lg shadow-lg">
-      {/* Profile Image */}
-      {image && (
-        <img
-          src={image}
-          alt={`${first_name} ${last_name}`}
-          className="w-32 h-32 rounded-full mb-4 shadow-lg"
-        />
-      )}
+    <div className="p-8 min-h-screen ">
+      <div className="p-8 bg-[#f1f1e9] shadow-lg rounded-lg mt-24">
+        {/* Profile Image Centered */}
+        <div className="flex justify-center mb-4">
+          {image ? (
+            <img
+              src={image}
+              alt={`${first_name} ${last_name}`}
+              className="w-64 h-64 rounded-full shadow-xl border-4 border-white"
+            />
+          ) : (
+            <div className="w-64 h-64 bg-indigo-100 rounded-full shadow-xl flex items-center justify-center text-indigo-500 border-4 border-white">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-24 w-24"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
+          )}
+        </div>
 
-      {/* Member Name and Title */}
-      <h1 className="mb-2 text-4xl font-bold text-gray-800">
-        {`${first_name} ${last_name}`}
-      </h1>
-      <p className="text-xl font-semibold text-gray-600">{title_member}</p>
-      {team && <p className="text-gray-500 text-lg mb-4">Team: {team}</p>}
+        {/* Member Info Section Below Image */}
+        <div className="text-center border-b pb-4 mb-4"> {/* Added margin below */}
+          <h1 className="text-5xl font-bold text-gray-800">{`${first_name} ${last_name}`}</h1>
+          {team && <p className="text-gray-500 mt-1 text-lg">{team}</p>}
+          {title_member && <p className="text-gray-600 mt-1 text-lg">{title_member}</p>}
+          {university && <p className="text-gray-600 mt-1 text-lg">{university}</p>}
+        </div>
 
-      {/* Bio Section */}
-      <div className="mt-4 mb-6 px-4 py-2 bg-white rounded shadow-md text-gray-700 max-w-xl">
-        <h2 className="text-2xl font-semibold mb-2">Biography</h2>
-        <p>{bio}</p>
-      </div>
+        {/* Biography Section */}
+        <div className="flex flex-col items-center mb-6">
+          <p className="text-gray-700 text-center font-light lg:px-16 max-w-3xl">
+            {bio}
+          </p>
+        </div>
 
-      {/* Additional Information */}
-      <div className="grid grid-cols-1 gap-4 max-w-xl sm:grid-cols-2">
-        {university && (
-          <div className="bg-white p-4 rounded-lg shadow-md">
-            <h3 className="font-semibold text-gray-800">University</h3>
-            <p className="text-gray-600">{university}</p>
-          </div>
-        )}
-        {linked_in && (
-          <div className="bg-white p-4 rounded-lg shadow-md">
-            <h3 className="font-semibold text-gray-800">LinkedIn</h3>
+        {/* Contact Icons Section */}
+        <div className="flex justify-center space-x-6">
+          {linked_in && (
             <a
               href={linked_in}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-500 underline"
+              className="p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition duration-300 transform hover:scale-110"
+              aria-label="LinkedIn"
             >
-              View Profile
+              <FaLinkedin className="h-10 w-10" />
             </a>
-          </div>
-        )}
-        {email && (
-          <div className="bg-white p-4 rounded-lg shadow-md">
-            <h3 className="font-semibold text-gray-800">Email</h3>
-            <p className="text-gray-600">{email}</p>
-          </div>
-        )}
-        <div className="bg-white p-4 rounded-lg shadow-md">
-          <h3 className="font-semibold text-gray-800">Member ID</h3>
-          <p className="text-gray-600">{member_id}</p>
+          )}
+          {email && (
+            <a
+              href={`mailto:${email}`}
+              className="p-2 rounded-full bg-gray-700 text-white hover:bg-gray-800 transition duration-300 transform hover:scale-110"
+              aria-label="Email"
+            >
+              <IoMail className="h-10 w-10" />
+            </a>
+          )}
         </div>
       </div>
     </div>
