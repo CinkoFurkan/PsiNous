@@ -79,6 +79,7 @@ class Member(models.Model):
     team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, related_name='members')
     title = models.CharField(max_length=50)
     bio = models.TextField(blank=True, null=True)
+    university = models.CharField(max_length=100, blank=True, null=True)
     linkedin = models.URLField(max_length=200)
     email = models.EmailField(blank=True, null=True)
     image = models.ImageField(upload_to='members/', blank=True, null=True)

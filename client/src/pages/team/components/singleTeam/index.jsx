@@ -9,7 +9,7 @@ const SingleTeam = ({ title, members }) => {
         {members.map((member, index) => (
           <div
             key={index}
-            className='p-5 bg-[#e7e4d8] border border-gray-200 rounded-lg shadow-lg w-72'
+            className='p-5 bg-[#f1f1e9] border border-gray-200 rounded-lg shadow-lg w-72'
           >
             <div className='flex flex-col items-center'>
               <Image member={member} />
