@@ -5,10 +5,10 @@ const Links = ({ links }) =>
     <nav>
       <ul className="flex space-x-8">
         {links.map((link) => (
-          <li key={link.id || link.link}>
+          <li className="relative group" key={link.id || link.link}>
             <NavLink
               className={({ isActive }) =>
-                isActive ? "relative group text-primary" : "relative group"
+                isActive ? "relative text-primary" : "relative"
               }
               to={`/${link.link}`}
             >

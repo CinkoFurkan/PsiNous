@@ -1,15 +1,19 @@
-import { useParams } from 'react-router-dom';
-import useFetch from '../../hooks/get';
-import { FaLinkedin } from 'react-icons/fa6';
-import { IoMail } from 'react-icons/io5';
+import { useParams } from "react-router-dom";
+import useFetch from "../../hooks/get";
+import { FaLinkedin } from "react-icons/fa6";
+import { IoMail } from "react-icons/io5";
 
 const MemberDetail = () => {
   const { id } = useParams();
   const { data, loading, error } = useFetch(`member_info/${id}`);
 
-  if (loading) return <div className="text-center p-8">Loading...</div>;
-  if (error) return <div className="text-center p-8">Error fetching member details.</div>;
-  if (!data || !data.member) return <div className="text-center p-8">Member not found.</div>;
+  if (loading) return <div className="p-8 text-center">Loading...</div>;
+  if (error)
+    return (
+      <div className="p-8 text-center">Error fetching member details.</div>
+    );
+  if (!data || !data.member)
+    return <div className="p-8 text-center">Member not found.</div>;
 
   const {
     first_name,
@@ -24,7 +28,7 @@ const MemberDetail = () => {
   } = data.member;
 
   return (
-    <div className="p-8 min-h-screen ">
+    <div className="min-h-screen p-8 ">
       <div className="p-8 bg-[#f1f1e9] shadow-lg rounded-lg mt-24">
         {/* Profile Image Centered */}
         <div className="flex justify-center mb-4">
@@ -32,13 +36,13 @@ const MemberDetail = () => {
             <img
               src={image}
               alt={`${first_name} ${last_name}`}
-              className="w-64 h-64 rounded-full shadow-xl border-4 border-white"
+              className="w-64 h-64 border-4 border-white rounded-full shadow-xl"
             />
           ) : (
-            <div className="w-64 h-64 bg-indigo-100 rounded-full shadow-xl flex items-center justify-center text-indigo-500 border-4 border-white">
+            <div className="flex items-center justify-center w-64 h-64 text-indigo-500 bg-indigo-100 border-4 border-white rounded-full shadow-xl">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-24 w-24"
+                className="w-24 h-24"
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >
@@ -53,16 +57,22 @@ const MemberDetail = () => {
         </div>
 
         {/* Member Info Section Below Image */}
-        <div className="text-center border-b pb-4 mb-4"> {/* Added margin below */}
+        <div className="pb-4 mb-4 text-center border-b">
+          {" "}
+          {/* Added margin below */}
           <h1 className="text-5xl font-bold text-gray-800">{`${first_name} ${last_name}`}</h1>
-          {team && <p className="text-gray-500 mt-1 text-lg">{team}</p>}
-          {title_member && <p className="text-gray-600 mt-1 text-lg">{title_member}</p>}
-          {university && <p className="text-gray-600 mt-1 text-lg">{university}</p>}
+          {team && <p className="mt-1 text-lg text-gray-500">{team}</p>}
+          {title_member && (
+            <p className="mt-1 text-lg text-gray-600">{title_member}</p>
+          )}
+          {university && (
+            <p className="mt-1 text-lg text-gray-600">{university}</p>
+          )}
         </div>
 
         {/* Biography Section */}
         <div className="flex flex-col items-center mb-6">
-          <p className="text-gray-700 text-center font-light lg:px-16 max-w-3xl">
+          <p className="max-w-3xl font-light text-center text-gray-700 lg:px-16">
             {bio}
           </p>
         </div>
@@ -74,19 +84,19 @@ const MemberDetail = () => {
               href={linked_in}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition duration-300 transform hover:scale-110"
+              className="p-2 text-white transition duration-300 transform bg-blue-500 rounded-full hover:bg-blue-600 hover:scale-110"
               aria-label="LinkedIn"
             >
-              <FaLinkedin className="h-10 w-10" />
+              <FaLinkedin className="w-10 h-10" />
             </a>
           )}
           {email && (
             <a
               href={`mailto:${email}`}
-              className="p-2 rounded-full bg-gray-700 text-white hover:bg-gray-800 transition duration-300 transform hover:scale-110"
+              className="p-2 text-white transition duration-300 transform bg-gray-700 rounded-full hover:bg-gray-800 hover:scale-110"
               aria-label="Email"
             >
-              <IoMail className="h-10 w-10" />
+              <IoMail className="w-10 h-10" />
             </a>
           )}
         </div>
