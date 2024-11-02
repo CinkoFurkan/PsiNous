@@ -80,6 +80,7 @@ def member(request):
     members = Member.objects.all()
     content = {
         "members": [{
+            "member_id": i.id,
             "first_name": i.first_name,
             "last_name": i.last_name,
             "team": i.team.title if i.team else None,
@@ -95,6 +96,57 @@ def member(request):
     }
     
     return Response(content, status=status.HTTP_200_OK)
+
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework import status
+from .models import Member
+
+@api_view(["GET"])
+def member_info(request, id=None):
+    if id:
+        # Fetch a single member by ID
+        try:
+            member = Member.objects.get(id=id)
+            content = {
+                "member": {
+                    "member_id": member.id,
+                    "first_name": member.first_name,
+                    "last_name": member.last_name,
+                    "team": member.team.title if member.team else None,
+                    "team_id": member.team.id if member.team else None,
+                    "title": member.team.title if member.team else None,
+                    "title_member": member.title,
+                    "university": member.university,
+                    "bio": member.bio,
+                    "linked_in": member.linkedin if member.linkedin else None,
+                    "email": member.email if member.email else None,
+                    "image": member.image.url if member.image else None
+                }
+            }
+            return Response(content, status=status.HTTP_200_OK)
+        except Member.DoesNotExist:
+            return Response({"error": "Member not found"}, status=status.HTTP_404_NOT_FOUND)
+    else:
+        # Fetch all members
+        members = Member.objects.all()
+        content = {
+            "members": [{
+                "member_id": i.id,
+                "first_name": i.first_name,
+                "last_name": i.last_name,
+                "team": i.team.title if i.team else None,
+                "team_id": i.team.id if i.team else None,
+                "title": i.team.title if i.team else None,
+                "title_member": i.title,
+                "university": i.university,
+                "bio": i.bio,
+                "linked_in": i.linkedin if i.linkedin else None,
+                "email": i.email if i.email else None,
+                "image": i.image.url if i.image else None
+            } for i in members]
+        }
+        return Response(content, status=status.HTTP_200_OK)
 
 
 @api_view(["GET"])

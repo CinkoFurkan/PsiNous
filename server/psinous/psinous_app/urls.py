@@ -2,7 +2,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from .views import titles, about, event, announcement, team, member, blog
+from .views import titles, about, event, announcement, team, member, blog, member_info
 
 urlpatterns = [
     path('api/link/', titles, name="titles"),
@@ -11,6 +11,7 @@ urlpatterns = [
     path('api/announcement/', announcement, name='announcement'),
     path('api/team/', team, name="team"),
     path('api/member/', member, name="member"),
+    path('api/member_info/<int:id>/', member_info, name="member_info"),
     path('api/blog/', blog, name='blog'),
 ]    
 
