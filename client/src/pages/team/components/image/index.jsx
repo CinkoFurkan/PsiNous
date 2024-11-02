@@ -2,7 +2,7 @@ const Image = ({ member }) => {
   return (
     <img
       src={member.image}
-      className='object-cover mb-4 rounded-full w-30 h-30'
+      className='object-cover w-40 h-40 rounded-lg'
       alt={`${member.first_name} ${member.last_name}`}
     />
   );
