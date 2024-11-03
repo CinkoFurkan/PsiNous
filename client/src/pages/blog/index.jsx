@@ -4,6 +4,7 @@ import Info from "./components/info";
 import Extra from "./components/extra";
 import { motion } from "framer-motion";
 
+
 const container = {
   visible: {
     transition: {
@@ -24,7 +25,7 @@ const item = {
 };
 
 const Blog = () => {
-  const { data } = useFetch("/blog");
+  const { data } = useFetch(`blog/`);
 
   return data && data.blogs ? (
     <motion.div
@@ -42,7 +43,7 @@ const Blog = () => {
         {data.blogs.map((blog, index) => (
           <motion.div variants={item} key={index} className="flip-card">
             <div className="flip-card-inner">
-              <div className="flex flex-col items-center justify-between p-4 bg-white border rounded-lg shadow-md flip-card-front">
+              <div className="flex flex-col items-center justify-between p-4 bg-[#e8e4d8] border rounded-lg shadow-md flip-card-front">
                 <Image blog={blog} />
                 <Info blog={blog} />
               </div>

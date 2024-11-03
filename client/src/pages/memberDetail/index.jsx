@@ -5,7 +5,7 @@ import { IoMail } from "react-icons/io5";
 
 const MemberDetail = () => {
   const { id } = useParams();
-  const { data, loading, error } = useFetch(`member_info/${id}`);
+  const { data, loading, error } = useFetch(`member/${id}`);
 
   if (loading) return <div className="p-8 text-center">Loading...</div>;
   if (error)

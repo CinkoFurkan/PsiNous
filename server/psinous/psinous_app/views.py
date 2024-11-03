@@ -97,15 +97,9 @@ def member(request):
     
     return Response(content, status=status.HTTP_200_OK)
 
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from rest_framework import status
-from .models import Member
-
 @api_view(["GET"])
 def member_info(request, id=None):
     if id:
-        # Fetch a single member by ID
         try:
             member = Member.objects.get(id=id)
             content = {
@@ -151,20 +145,61 @@ def member_info(request, id=None):
 
 @api_view(["GET"])
 def blog(request):
+    
     blogs = Blog.objects.all()
     content = {
-        "blogs" :  [{
-            "title": i.title,
-            "short_text": i.short_text,
-            "text": i.text,
-            "writer_f": i.writer.first_name,
-            "writer_l": i.writer.last_name,
-            "writer_title": i.writer.title,
-            "writer_image": i.writer.image.url,
-            "created_at": i.created_at,
-            "updated_at": i.updated_at,
-            "is_published": i.is_published,
-            "image": i.image.url if i.image else None
-        } for i in blogs]
-    }
+            "blogs" :  [{
+                "blog_id": i.id,
+                "title": i.title,
+                "short_text": i.short_text,
+                "text": i.text,
+                "writer_f": i.writer.first_name,
+                "writer_l": i.writer.last_name,
+                "writer_title": i.writer.title,
+                "writer_image": i.writer.image.url,
+                "created_at": i.created_at,
+                "updated_at": i.updated_at,
+                "is_published": i.is_published,
+                "image": i.image.url if i.image else None
+            } for i in blogs]
+        }
+    return Response(content, status=status.HTTP_200_OK)
+
+@api_view(["GET"])
+def blog_detail(request, id=None):
+    if id:
+        blog = Blog.objects.get(id=id)
+        content = {
+            "blogs" :  [{
+                "blog_id": blog.id,
+                "title": blog.title,
+                "short_text": blog.short_text,
+                "text": blog.text,
+                "writer_f": blog.writer.first_name,
+                "writer_l": blog.writer.last_name,
+                "writer_title": blog.writer.title,
+                "writer_image": blog.writer.image.url,
+                "created_at": blog.created_at,
+                "updated_at": blog.updated_at,
+                "is_published": blog.is_published,
+                "image": blog.image.url if blog.image else None
+            }]
+        }
+    else:
+        blogs = Blog.objects.all()
+        content = {
+            "blogs" :  [{
+                "title": i.title,
+                "short_text": i.short_text,
+                "text": i.text,
+                "writer_f": i.writer.first_name,
+                "writer_l": i.writer.last_name,
+                "writer_title": i.writer.title,
+                "writer_image": i.writer.image.url,
+                "created_at": i.created_at,
+                "updated_at": i.updated_at,
+                "is_published": i.is_published,
+                "image": i.image.url if i.image else None
+            } for i in blogs]
+        }
     return Response(content, status=status.HTTP_200_OK)

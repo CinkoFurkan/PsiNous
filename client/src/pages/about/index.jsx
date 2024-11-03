@@ -15,16 +15,12 @@ const About = () => {
                 ve Zeynep Öztuğcu tarafından kurulan; ruh sağlığı alanında
                 eğitim gören öğrencilerin mesleki gelişimlerine katkı sunmayı
                 amaçlayan, kâr amacı gütmeyen bir öğrenci topluluğudur.
-                <br />
-                <br />
                 PsiNous olarak amacımız, ruh sağlığı alanındaki öğrencilerin
                 bilgi ve farkındalık düzeylerini artırarak akademik ve mesleki
                 donanımlarını geliştirmektir. Bu doğrultuda düzenlediğimiz
                 çeşitli eğitim, seminer ve etkinliklerle öğrencilerin mesleki
                 gelişimlerini desteklerken; onları sahada aktif, bilinçli ve
                 etkili profesyoneller olmaları için teşvik ediyoruz.
-                <br />
-                <br />
                 PsiNous olarak, özgün, yenilikçi ve nitelikli etkinliklerle
                 öğrencilerin bu alanda yetkin bireyler olmalarına, aynı zamanda
                 mesleki etik ve bilinç kazanmalarına da önem veriyoruz. Ayrıca

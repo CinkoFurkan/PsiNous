@@ -5,7 +5,7 @@ const Announcement = () => {
 
   return data && data.announcement ? (
     <div className='min-h-screen p-10'>
-      <h1 className='mb-12 text-4xl font-bold text-center text-gray-800'>
+      <h1 className='mb-12 text-4xl font-bold text-center text-black'>
         Duyurular
       </h1>
       <div className='grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3'>
