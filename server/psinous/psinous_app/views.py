@@ -11,13 +11,13 @@ from django.utils import timezone
 @api_view(["GET"])
 def titles(request):
     links = Link.objects.filter(is_active=True)
-    
+
     content = [{
             "link": link.name,
             "sublink": [sublink.name for sublink in Sublink.objects.filter(is_active=True, link=link)]
         } for link in links]
-    
-    return Response(content, status=status.HTTP_200_OK) 
+
+    return Response(content, status=status.HTTP_200_OK)
 
 @api_view(["GET"])
 def about(request):
@@ -29,8 +29,8 @@ def about(request):
             "image": i.image.url if i.image else None
         } for i in about]
     }
-    
-    return Response(content, status=status.HTTP_200_OK) 
+
+    return Response(content, status=status.HTTP_200_OK)
 
 @api_view(["GET"])
 def event(request):
@@ -46,8 +46,8 @@ def event(request):
             "image": i.image.url if i.image else None
         } for i in event]
     }
-    
-    return Response(content, status=status.HTTP_200_OK)   
+
+    return Response(content, status=status.HTTP_200_OK)
 
 @api_view(["GET"])
 def announcement(request):
@@ -59,8 +59,8 @@ def announcement(request):
             "image": i.image.url if i.image else None
         } for i in announcement]
     }
-    
-    return Response(content, status=status.HTTP_200_OK)  
+
+    return Response(content, status=status.HTTP_200_OK)
 
 @api_view(["GET"])
 def team(request):
@@ -72,7 +72,7 @@ def team(request):
             "image": i.image.url if i.image else None
         } for i in team_infos]
     }
-    
+
     return Response(content, status=status.HTTP_200_OK)
 
 @api_view(["GET"])
@@ -94,7 +94,7 @@ def member(request):
             "image": i.image.url if i.image else None
         } for i in members]
     }
-    
+
     return Response(content, status=status.HTTP_200_OK)
 
 @api_view(["GET"])
@@ -145,7 +145,7 @@ def member_info(request, id=None):
 
 @api_view(["GET"])
 def blog(request):
-    
+
     blogs = Blog.objects.all()
     content = {
             "blogs" :  [{
@@ -170,7 +170,7 @@ def blog_detail(request, id=None):
     if id:
         blog = Blog.objects.get(id=id)
         content = {
-            "blogs" :  [{
+            "blogs" :  {
                 "blog_id": blog.id,
                 "title": blog.title,
                 "short_text": blog.short_text,
@@ -183,7 +183,7 @@ def blog_detail(request, id=None):
                 "updated_at": blog.updated_at,
                 "is_published": blog.is_published,
                 "image": blog.image.url if blog.image else None
-            }]
+            }
         }
     else:
         blogs = Blog.objects.all()
