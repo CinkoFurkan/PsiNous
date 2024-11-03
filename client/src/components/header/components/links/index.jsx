@@ -1,7 +1,15 @@
 import { NavLink } from "react-router-dom";
+import useMedia from "../../../../hooks/use-media";
+import ResponsiveLinks from "../responsive-links";
 
-const Links = ({ links }) =>
-  links && links.length > 0 ? (
+const Links = ({ links }) => {
+  const isMobile = useMedia(600);
+
+  if (isMobile) {
+    return <ResponsiveLinks links={links} />;
+  }
+
+  return links && links.length > 0 ? (
     <nav>
       <ul className="flex space-x-8">
         {links.map((link) => (
@@ -33,5 +41,6 @@ const Links = ({ links }) =>
       </ul>
     </nav>
   ) : null;
+};
 
 export default Links;
