@@ -2,42 +2,43 @@ import React from "react";
 import useFetch from "../../../../hooks/get";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 
 const Announcement = () => {
   const { data } = useFetch("/announcement");
 
   return data && data.announcement ? (
-    <div className="flex flex-col items-center w-full p-6 mt-16 space-y-6">
-      <div className="grid items-center w-full max-w-6xl grid-cols-1 gap-6 md:grid-cols-2">
-        <div className="flex flex-col items-start md:items-start">
-          <h1 className="text-4xl font-bold text-gray-900">Psious Duyurular</h1>
-        </div>
+    <div className="w-full relative p-6 my-32">
+      <div className="relative rounded-3xl overflow-hidden p-8">
         <Swiper
-          modules={[Navigation, Pagination, Autoplay]}
+          modules={[Pagination, Autoplay]}
           spaceBetween={20}
-          slidesPerView={2}
-          autoplay={{ delay: 4000 }}
-          className="relative w-full"
-          style={{ width: "600px" }}
+          slidesPerView={1}
+          autoplay={{ delay: 5000 }}
+          pagination={{ clickable: true }}
+          className="swiper-wrapper"
         >
           {data.announcement.map((announcement, index) => (
-            <SwiperSlide key={index}>
-              <div className="flex flex-col items-center bg-[#e7e4d8] rounded-md shadow-md p-4 h-96 w-72">
+            <SwiperSlide key={index} className="swiper-slide">
+              <div className="flex flex-col md:flex-row items-center h-72 gap-6 relative">
+                {/* Image Section */}
                 {announcement.image && (
-                  <img
-                    src={announcement.image}
-                    alt="Announcement"
-                    className="object-cover w-full h-48 mb-4 rounded-md shadow-sm"
-                  />
+                  <div className="flex justify-center items-center md:w-1/2 h-full rounded-2xl overflow-hidden shadow-lg">
+                    <img
+                      src={announcement.image}
+                      alt="Announcement"
+                      className="object-cover h-full w-full transition-transform duration-500 hover:scale-105"
+                    />
+                  </div>
                 )}
-                <div className="flex flex-col w-full space-y-2">
-                  <h2 className="text-lg font-medium text-gray-800 line-clamp-1">
+
+                {/* Content Section */}
+                <div className="flex flex-col justify-center md:w-1/2 text-white space-y-4 p-6 bg-gradient-to-tr from-gray-900/80 via-gray-800/70 to-transparent rounded-lg shadow-lg backdrop-blur-md">
+                  <h2 className="text-4xl font-semibold text-indigo-100 drop-shadow-md">
                     {announcement.title}
                   </h2>
-                  <p className="text-sm text-gray-700 line-clamp-2">
+                  <p className="text-lg font-light leading-relaxed text-gray-300">
                     {announcement.text}
                   </p>
                 </div>
@@ -45,6 +46,12 @@ const Announcement = () => {
             </SwiperSlide>
           ))}
         </Swiper>
+
+        {/* Pagination Dots */}
+        <div className="swiper-pagination mt-4 flex justify-center gap-2">
+          {/* Custom pagination dots */}
+          <div className="swiper-pagination-bullet bg-gray-500 opacity-70 hover:opacity-100 transition-all duration-300"></div>
+        </div>
       </div>
     </div>
   ) : null;
