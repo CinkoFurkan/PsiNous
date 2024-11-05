@@ -4,17 +4,32 @@ import { motion } from "framer-motion";
 
 const Team = () => {
   const { data } = useFetch("/member");
+  const { data: teamsData } = useFetch("/team");
 
   const teams = data.members?.reduce((acc, member) => {
     if (!acc[member.team_id]) {
       acc[member.team_id] = {
         title: member.title,
         members: [],
+        position: member.position, 
       };
     }
     acc[member.team_id].members.push(member);
     return acc;
   }, {});
+
+  if (teamsData && teams) {
+    Object.entries(teams).forEach(([teamId, team]) => {
+      const teamInfo = teamsData.team_infos.find(t => t.title === team.title);
+      if (teamInfo) {
+        team.position = teamInfo.position; 
+      }
+    });
+  }
+
+  const sortedTeams = Object.entries(teams || {}).sort((a, b) => {
+    return a[1].position - b[1].position; 
+  });
 
   return data && teams ? (
     <motion.div
@@ -22,7 +37,7 @@ const Team = () => {
       animate={{ opacity: 1 }}
       className="p-10 text-center"
     >
-      {Object.entries(teams).map(([teamId, team]) => (
+      {sortedTeams.map(([teamId, team]) => (
         <SingleTeam key={teamId} title={team.title} members={team.members} />
       ))}
     </motion.div>

@@ -65,6 +65,7 @@ class Team(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     description = models.TextField()
+    position = models.PositiveIntegerField(default=0, blank=True, null=True) 
     year = models.CharField(max_length=255,blank=True, null=True)
     image = models.ImageField(upload_to='teams/', blank=True, null=True)
 

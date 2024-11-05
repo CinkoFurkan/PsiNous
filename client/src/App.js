@@ -11,6 +11,7 @@ import Contact from "./pages/contact";
 import Footer from "./components/footer";
 import MemberDetail from "./pages/memberDetail";
 import BlogDetails from "./pages/blog/components/blog-details";
+import TeamDetails from "./pages/team/components/team-details";
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
           <Route path="/İletişim" element={<Contact />} />
           <Route path="/member/:id" element={<MemberDetail />} />
           <Route path="/blog/:id" element={<BlogDetails />} />
+          <Route path="/Birimlerimiz" element={<TeamDetails />} />
         </Routes>
         <Footer />
       </div>

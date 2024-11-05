@@ -69,6 +69,7 @@ def team(request):
         "team_infos": [{
             "title": i.title,
             "description": i.description,
+            "position": i.position,
             "image": i.image.url if i.image else None
         } for i in team_infos]
     }

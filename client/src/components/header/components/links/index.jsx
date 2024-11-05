@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useMedia from "../../../../hooks/use-media";
 import ResponsiveLinks from "../responsive-links";
 
@@ -27,12 +27,13 @@ const Links = ({ links }) => {
             {link.sublink && link.sublink.length > 0 && (
               <ul className="absolute left-0 hidden w-48 bg-white rounded-lg shadow-lg group-hover:block">
                 {link.sublink.map((sublink, subindex) => (
+                 <Link to={`/${sublink}`}>
                   <li
                     key={subindex}
                     className="px-4 py-2 text-black hover:text-[#bc090b] cursor-pointer rounded"
                   >
                     {sublink}
-                  </li>
+                  </li></Link>
                 ))}
               </ul>
             )}

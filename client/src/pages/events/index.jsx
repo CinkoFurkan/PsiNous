@@ -10,6 +10,8 @@ const Events = () => {
     (a, b) => new Date(b.date) - new Date(a.date)
   );
 
+  
+
   return data && data.event ? (
     <div className='p-10'>
       <h1 className='mb-8 text-4xl font-bold text-center'>Etkinlikler</h1>
