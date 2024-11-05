@@ -3,9 +3,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Link, Sublink, About, Event, Announcement, Team, Member, Blog
-from django.utils import timezone
 
-# API views
 #ibo was here
 
 @api_view(["GET"])
