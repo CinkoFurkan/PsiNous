@@ -11,7 +11,7 @@ const Card = ({ image, title }) => {
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'center',
-        backgroundColor: '#4dab99',
+
     };
 
     const imageStyle = {
