@@ -1,6 +1,9 @@
 const KVKK = () => {
   return (
-    <div className='mt-4 text-sm text-center'>
+    <div className='text-sm text-center'>
+       <p className='mb-2'>
+        PsiNous IT Birimi
+      </p>
       <p className='mb-2'>
         &copy; {new Date().getFullYear()} Tüm Hakları Saklıdır.
       </p>

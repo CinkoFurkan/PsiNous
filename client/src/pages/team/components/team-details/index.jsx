@@ -1,6 +1,8 @@
 import React from 'react';
+import useFetch from '../../../../hooks/get';  // Assuming your useFetch hook is in a separate file
 
-const Card = ({ image, title }) => {
+// Card component to display individual team member's image and description
+const Card = ({ image, description }) => {
     const cardStyle = {
         width: 'calc(49% - 10px)', 
         height: 'auto', 
@@ -11,7 +13,6 @@ const Card = ({ image, title }) => {
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'center',
-
     };
 
     const imageStyle = {
@@ -22,27 +23,31 @@ const Card = ({ image, title }) => {
         backgroundColor: '#0000',
     };
 
-    const titleStyle = {
-        fontSize: '1.5rem',
-        color: '#333',
+    const descriptionStyle = {
+        fontSize: '1rem',
+        color: '#555',
         marginTop: '10px',
     };
 
+    if (!image || !description) {
+        // If either image or description is missing, don't render this card
+        return null;
+    }
+
     return (
         <div style={cardStyle}>
-            {image ? (
-                <img src={image} alt={title} style={imageStyle} />
-            ) : (
-                <div style={{ ...imageStyle, backgroundColor: '#0000' }}>
-                    Görsel Yüklenemedi
-                </div>
+            {image && (
+                <img src={image} alt="Team member" style={imageStyle} />
             )}
-            {title && <h3 style={titleStyle}>{title}</h3>}
+            {description && <p style={descriptionStyle}>{description}</p>}
         </div>
     );
 };
 
+// Cards container component to render all team members
 const Cards = () => {
+    const { data: teamData } = useFetch('team');  // Fetch data from the `/team` API endpoint
+
     const containerStyle = {
         display: 'flex',
         flexWrap: 'wrap',
@@ -55,24 +60,18 @@ const Cards = () => {
 
     return (
         <div style={containerStyle}>
-            <Card 
-                image="https://i.hizliresim.com/t9s9kc8.jpg"
-            />
-            <Card 
-                image="https://i.hizliresim.com/83tk9w8.jpg"
-            />
-            <Card 
-                image="https://i.hizliresim.com/3ockcsm.jpg"
-            />
-            <Card 
-                image="https://i.hizliresim.com/4luwzot.jpg"
-            />
-            <Card 
-                image="https://i.hizliresim.com/8t81nmq.jpg"
-            />
-            <Card 
-                image="https://i.hizliresim.com/f8g9lvy.jpg"
-            />
+            {teamData?.team_infos?.length > 0 ? (
+                teamData.team_infos.map((teamMember, index) => (
+                    // Only render the Card if both image and description are available
+                    <Card 
+                        key={index} 
+                        image={teamMember.image} 
+                        description={teamMember.description} 
+                    />
+                ))
+            ) : (
+                <div>Loading team members...</div>
+            )}
         </div>
     );
 };

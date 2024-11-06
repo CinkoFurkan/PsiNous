@@ -42,7 +42,7 @@
   
   /* Back side style */
   .flip-card-back {
-    background-color: #b6070756; /* Set back background */
+    background-color: #b6070728; /* Set back background */
     color: #000;
     transform: rotateY(180deg); /* Start with back side rotated */
   }
