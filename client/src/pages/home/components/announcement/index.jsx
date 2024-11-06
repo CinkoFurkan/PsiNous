@@ -11,6 +11,7 @@ const Announcement = () => {
   return data && data.announcement ? (
 
     <div className="w-full relative p-6 my-32"> 
+    <div className="text-center mb-8 text-4xl font-bold text-black"><h1>Duyurular</h1></div>
       <div className="relative rounded-3xl overflow-hidden p-8">
         <Swiper
           modules={[Pagination, Autoplay]}
@@ -22,7 +23,7 @@ const Announcement = () => {
         >
           {data.announcement.map((announcement, index) => (
             <SwiperSlide key={index} className="swiper-slide">
-              <div className="flex flex-col items-center h-96 gap-6 relative">
+              <div className="flex flex-col items-center h-full gap-6 relative">
                 {/* Image Section */}
                 {announcement.image && (
                   <div className="flex justify-center items-center h-full rounded-2xl overflow-hidden shadow-lg">

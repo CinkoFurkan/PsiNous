@@ -62,7 +62,7 @@ def announcement(request):
 
 @api_view(["GET"])
 def team(request):
-    team_infos = Team.objects.all()
+    team_infos = Team.objects.all().order_by('position')
     content = {
         "team_infos": [{
             "title": i.title,

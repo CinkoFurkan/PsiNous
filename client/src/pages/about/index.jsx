@@ -25,14 +25,14 @@ const About = () => {
               </p>
             </div>
             <div>
-              <p className='mb-3 text-sm text-center text-black'>
+              <p className='mb-3 text-mg text-center text-black'>
                 {aboutSections[1]?.text || "Default text if no data"}
               </p>
               {aboutSections[1]?.image && (
                 <img
                   src={aboutSections[0]?.image}
                   alt='About'
-                  className='w-[6/12] h-[200px] mx-auto'
+                  className='w-[3/4] h-[410px] mx-auto mt-10'
                 />
               )}
             </div>
@@ -57,7 +57,7 @@ const About = () => {
                   ></div>
 
                   {otherAboutSections.map((section, index) => (
-                    <div key={index} className={`flex ${index % 2 === 0 ? 'flex-row-reverse' : ''} items-center justify-between w-full mb-8`}>
+                    <div key={index} className={`flex ${index % 2 === 0 ? 'flex-row-reverse' : ''} items-center justify-between w-full mb-24`}>
                       <div className='order-1 w-5/12'>
                         {section.image && (
                           <img
@@ -71,7 +71,7 @@ const About = () => {
                         <h4 className='mb-3 text-lg font-bold md:text-2xl text-primary'>
                           {section.title}
                         </h4>
-                        <p className='text-sm leading-snug text-black md:text-base'>
+                        <p className='text-md leading-snug text-black md:text-base'>
                           {section.text}
                         </p>
                       </div>
@@ -86,7 +86,7 @@ const About = () => {
                 <h4 className='mb-3 text-lg font-bold md:text-2xl text-primary'>
                 {aboutSections[4]?.title}
                 </h4>
-                <p className='text-sm leading-snug text-black md:text-base italic'>
+                <p className='text- leading-snug text-black md:text-base'>
                 {aboutSections[4]?.text}
                 </p>
               </div>

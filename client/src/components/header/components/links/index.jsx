@@ -25,15 +25,15 @@ const Links = ({ links }) => {
               </span>
             </NavLink>
             {link.sublink && link.sublink.length > 0 && (
-              <ul className="absolute left-0 hidden w-48 bg-white rounded-lg shadow-lg group-hover:block">
+              <ul
+                className="absolute left-0 hidden w-48 bg-background rounded-xl shadow-xl group-hover:block transition-all duration-200 ease-in-out opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 z-20"
+              >
                 {link.sublink.map((sublink, subindex) => (
-                 <Link to={`/${sublink}`}>
-                  <li
-                    key={subindex}
-                    className="px-4 py-2 text-black hover:text-[#bc090b] cursor-pointer rounded"
-                  >
-                    {sublink}
-                  </li></Link>
+                  <Link key={subindex} to={`/${sublink}`}>
+                    <li className="px-4 py-2 text-black hover:text-[#bc090b] hover:bg-[#e8e4d8] cursor-pointer rounded transition-colors duration-150">
+                      {sublink}
+                    </li>
+                  </Link>
                 ))}
               </ul>
             )}
