@@ -39,7 +39,7 @@ def event(request):
             "description": i.description,
             "location" : i.location,
             "registration_link": i.registration_link,
-            "event_date" : timezone.localtime(i.event_date),
+            "event_date" : i.event_date,
             "is_active" : i.is_active,
             "image": i.image.url if i.image else None
         } for i in event]
