@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Link, Sublink, About, Event, Announcement, Team, Member, Blog
+from .models import Link, Sublink, About, Event, Announcement, Team, Member, Blog, Subscribe
 
 #ibo was here
 
@@ -202,3 +202,15 @@ def blog_detail(request, id=None):
             } for i in blogs]
         }
     return Response(content, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def email(request):
+    user_mail = request.data.get('user_mail')
+    if not user_mail:
+        return Response({"error": "Email is required."}, status=status.HTTP_400_BAD_REQUEST)
+
+    # Save email to the database
+    subscribe = Subscribe(mail=user_mail)
+    subscribe.save()
+
+    return Response({"success": "Email has been successfully subscribed."}, status=status.HTTP_201_CREATED)

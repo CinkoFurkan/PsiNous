@@ -2,7 +2,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from .views import titles, about, event, announcement, team, member, blog, member_info, blog_detail
+from .views import titles, about, event, announcement, team, member, blog, member_info, blog_detail, email
 
 
 urlpatterns = [
@@ -15,6 +15,7 @@ urlpatterns = [
     path('api/member/<int:id>/', member_info, name="member_info"),
     path('api/blog/', blog, name='blog'),
     path('api/blog/<int:id>/', blog_detail, name='blog'),
+    path('api/email/', email, name='email')
 ]    
 
 if settings.DEBUG:

@@ -101,3 +101,11 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+
+class Subscribe(models.Model):
+    id = models.AutoField(primary_key=True)
+    mail = models.EmailField(unique=True)
+    subscribed_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.mail
