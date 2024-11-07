@@ -15,7 +15,7 @@ const Events = () => {
   return data && data.event ? (
     <div className='p-10'>
       <h1 className='mb-8 text-4xl font-bold text-center'>Etkinlikler</h1>
-      <div className='grid w-full grid-cols-5 gap-10 px-4'>
+      <div className='grid w-full grid-cols-4 gap-10 px-4'>
         {sortedEvents.map((event, index) => {
           return (
             <div
