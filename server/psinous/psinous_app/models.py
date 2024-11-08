@@ -4,14 +4,14 @@ class Link(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
-    position = models.PositiveIntegerField(default=0, blank=True, null=True) 
+    position = models.PositiveIntegerField(default=0, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
 
     class Meta:
-        ordering = ['position']  
+        ordering = ['position']
 
 
 class Sublink(models.Model):
@@ -19,14 +19,14 @@ class Sublink(models.Model):
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
     link = models.ForeignKey(Link, on_delete=models.CASCADE, related_name='sublinks')
-    position = models.PositiveIntegerField(default=0, blank=True, null=True)  
+    position = models.PositiveIntegerField(default=0, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
 
     class Meta:
-        ordering = ['position']  
+        ordering = ['position']
 
 class About(models.Model):
     id = models.AutoField(primary_key=True)
@@ -51,7 +51,7 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
-    
+
 class Announcement(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=30,blank=True, null=True)
@@ -65,7 +65,7 @@ class Team(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     description = models.TextField()
-    position = models.PositiveIntegerField(default=0, blank=True, null=True) 
+    position = models.PositiveIntegerField(default=0, blank=True, null=True)
     year = models.CharField(max_length=255,blank=True, null=True)
     image = models.ImageField(upload_to='teams/', blank=True, null=True)
 
@@ -109,3 +109,11 @@ class Subscribe(models.Model):
 
     def __str__(self):
         return self.mail
+
+class Contact(models.Model):
+    id = models.AutoField(primary_key=True)
+    user_name = models.CharField(max_length=255)
+    user_email = models.EmailField()
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)

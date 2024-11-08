@@ -12,10 +12,21 @@ import Footer from "./components/footer";
 import MemberDetail from "./pages/memberDetail";
 import BlogDetails from "./pages/blog/components/blog-details";
 import TeamDetails from "./pages/team/components/team-details";
+import { Toaster } from "react-hot-toast";
 
 export default function App() {
   return (
     <div className="w-screen h-auto bg-background">
+      <Toaster
+        toastOptions={{
+          success: {
+            style: {
+              background: "#b60707",
+              color: "#fff",
+            },
+          },
+        }}
+      />
       <div>
         <Header />
         <Routes>
@@ -31,6 +42,7 @@ export default function App() {
           <Route path="/member/:id" element={<MemberDetail />} />
           <Route path="/blog/:id" element={<BlogDetails />} />
           <Route path="/Birimlerimiz" element={<TeamDetails />} />
+          <Route path="/Hakkımızda" element={<About />} />
         </Routes>
         <Footer />
       </div>

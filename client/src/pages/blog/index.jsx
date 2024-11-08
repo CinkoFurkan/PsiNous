@@ -4,7 +4,6 @@ import Info from "./components/info";
 import Extra from "./components/extra";
 import { motion } from "framer-motion";
 
-
 const container = {
   visible: {
     transition: {
@@ -31,7 +30,7 @@ const Blog = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="flex flex-col items-center w-full p-8 mt-10"
+      className="flex flex-col items-center w-full mt-10 h-[calc(100vh-264px)]"
     >
       <h1 className="mb-8 text-4xl font-bold text-gray-900">Bloglar</h1>
       <motion.div

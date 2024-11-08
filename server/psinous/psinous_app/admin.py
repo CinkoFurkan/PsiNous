@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Link, Sublink, About, Event, Announcement, Member, Blog, Team, Subscribe
+from .models import Link, Sublink, About, Event, Announcement, Member, Blog, Team, Subscribe, Contact
 
 class linkAdmin(admin.ModelAdmin):
     list_display = ("name", "is_active", "position")
@@ -26,6 +26,9 @@ class memberAdmin(admin.ModelAdmin):
 class blogAdmin(admin.ModelAdmin):
     list_display = ("title", 'writer', "is_published")
 
+class contactAdmin(admin.ModelAdmin):
+    list_display = ("user_name", 'subject', "user_email")
+
 admin.site.register(Link, linkAdmin)
 admin.site.register(Sublink, sublinkAdmin)
 admin.site.register(About, aboutAdmin)
@@ -35,3 +38,4 @@ admin.site.register(Team, teamAdmin)
 admin.site.register(Member, memberAdmin)
 admin.site.register(Blog, blogAdmin)
 admin.site.register(Subscribe)
+admin.site.register(Contact , contactAdmin)

@@ -2,7 +2,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from .views import titles, about, event, announcement, team, member, blog, member_info, blog_detail, email
+from .views import titles, about, event, announcement, team, member, blog, member_info, blog_detail, email , contact
 
 
 urlpatterns = [
@@ -15,8 +15,9 @@ urlpatterns = [
     path('api/member/<int:id>/', member_info, name="member_info"),
     path('api/blog/', blog, name='blog'),
     path('api/blog/<int:id>/', blog_detail, name='blog'),
-    path('api/email/', email, name='email')
-]    
+    path('api/email/', email, name='email'),
+    path('api/contact/', contact, name='contact'),
+]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
