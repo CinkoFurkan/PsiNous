@@ -117,3 +117,8 @@ class Contact(models.Model):
     subject = models.CharField(max_length=255)
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+class Message(models.Model):
+    id = models.AutoField(primary_key=True)
+    subject = models.TextField()
+    message = models.TextField()

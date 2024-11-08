@@ -2,7 +2,9 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Contact, Link, Sublink, About, Event, Announcement, Team, Member, Blog, Subscribe
+from .models import Contact, Link, Sublink, About, Event, Announcement, Team, Member, Blog, Subscribe, Message
+from django.core.mail import send_mail
+from django.conf import settings
 
 #ibo was here
 
@@ -231,3 +233,31 @@ def contact(request):
     )
     contact.save()
     return Response({"success": "Email has been successfully subscribed."}, status=status.HTTP_201_CREATED)
+
+from django.conf import settings
+from django.core.mail import send_mail
+from .models import Subscribe, Message
+
+def mail_sender(message_id=None):
+
+    emails = Subscribe.objects.all()
+    user_emails = [mail_.mail for mail_ in emails] 
+
+    try:
+        if message_id:
+            message_obj = Message.objects.get(id=message_id)
+        else:
+            message_obj = Message.objects.latest('id')  
+    except Message.DoesNotExist:
+        print("Message not found.")
+        return  
+    
+    subject = message_obj.subject
+    message = message_obj.message  
+
+    send_mail(
+        subject=subject,
+        message=message,
+        from_email=settings.EMAIL_HOST_USER,
+        recipient_list=user_emails
+    )

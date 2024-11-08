@@ -1,41 +1,52 @@
 from django.contrib import admin
+from .views import mail_sender
+from .models import Link, Sublink, About, Event, Announcement, Member, Blog, Team, Subscribe, Contact, Message
 
-from .models import Link, Sublink, About, Event, Announcement, Member, Blog, Team, Subscribe, Contact
-
-class linkAdmin(admin.ModelAdmin):
+class LinkAdmin(admin.ModelAdmin):
     list_display = ("name", "is_active", "position")
 
-class sublinkAdmin(admin.ModelAdmin):
+class SublinkAdmin(admin.ModelAdmin):
     list_display = ("name", "link", "is_active", "position")
 
-class aboutAdmin(admin.ModelAdmin):
+class AboutAdmin(admin.ModelAdmin):
     list_display = ("name", "text")
 
-class eventAdmin(admin.ModelAdmin):
-    list_display = ("title", "event_date", 'is_active')
+class EventAdmin(admin.ModelAdmin):
+    list_display = ("title", "event_date", "is_active")
 
-class announcementAdmin(admin.ModelAdmin):
-    list_display = ("title", 'text')
+class AnnouncementAdmin(admin.ModelAdmin):
+    list_display = ("title", "text")
 
-class teamAdmin(admin.ModelAdmin):
-    list_display = ("title", 'description')
+class TeamAdmin(admin.ModelAdmin):
+    list_display = ("title", "description")
 
-class memberAdmin(admin.ModelAdmin):
-    list_display = ("first_name", 'title', "team")
+class MemberAdmin(admin.ModelAdmin):
+    list_display = ("first_name", "title", "team")
 
-class blogAdmin(admin.ModelAdmin):
-    list_display = ("title", 'writer', "is_published")
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ("title", "writer", "is_published")
 
-class contactAdmin(admin.ModelAdmin):
-    list_display = ("user_name", 'subject', "user_email")
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ("user_name", "subject", "user_email")
 
-admin.site.register(Link, linkAdmin)
-admin.site.register(Sublink, sublinkAdmin)
-admin.site.register(About, aboutAdmin)
-admin.site.register(Event, eventAdmin)
-admin.site.register(Announcement, announcementAdmin)
-admin.site.register(Team, teamAdmin)
-admin.site.register(Member, memberAdmin)
-admin.site.register(Blog, blogAdmin)
-admin.site.register(Subscribe)
-admin.site.register(Contact , contactAdmin)
+@admin.action(description="Send email to all subscribers")
+def send_email_to_subscribers(modeladmin, request, queryset):
+    mail_sender()
+    modeladmin.message_user(request, "Emails have been sent successfully.")
+
+class SubscribeAdmin(admin.ModelAdmin):
+    list_display = ("mail",)  # Assuming you have an 'email' field in Subscribe model
+    actions = [send_email_to_subscribers]  # Register the action here
+
+# Registering models with admin site
+admin.site.register(Link, LinkAdmin)
+admin.site.register(Sublink, SublinkAdmin)
+admin.site.register(About, AboutAdmin)
+admin.site.register(Event, EventAdmin)
+admin.site.register(Announcement, AnnouncementAdmin)
+admin.site.register(Team, TeamAdmin)
+admin.site.register(Member, MemberAdmin)
+admin.site.register(Blog, BlogAdmin)
+admin.site.register(Subscribe, SubscribeAdmin)  
+admin.site.register(Contact, ContactAdmin)
+admin.site.register(Message)
