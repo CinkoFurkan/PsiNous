@@ -9,8 +9,7 @@
     border: 1px solid #F1F1F1;
     perspective: 1000px; 
   }
-  
- 
+
   .flip-card-inner {
     position: relative;
     width: 100%;
@@ -19,13 +18,11 @@
     transition: transform 0.5s; 
     transform-style: preserve-3d; 
   }
-  
-  /* Flip effect on hover */
+
   .flip-card:hover .flip-card-inner {
     transform: rotateY(180deg);
   }
-  
-  
+
   .flip-card-front,
   .flip-card-back {
     position: absolute;

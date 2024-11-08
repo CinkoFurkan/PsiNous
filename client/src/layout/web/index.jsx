@@ -7,7 +7,6 @@ import Team from "../../pages/team";
 import Events from "../../pages/home/components/events";
 import Blog from "../../pages/blog";
 import Announcement from "../../pages/home/components/announcement";
-import Galery from "../../pages/galery";
 import Contact from "../../pages/contact";
 import MemberDetail from "../../pages/memberDetail";
 import BlogDetails from "../../pages/blog/components/blog-details";
@@ -25,7 +24,6 @@ export default function WebLayout() {
         <Route path="/etkinliklerimiz" element={<Events />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/duyurular" element={<Announcement />} />
-        <Route path="/galeri" element={<Galery />} />
         <Route path="/İletişim" element={<Contact />} />
         <Route path="/member/:id" element={<MemberDetail />} />
         <Route path="/blog/:id" element={<BlogDetails />} />
