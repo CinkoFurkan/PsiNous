@@ -5,6 +5,8 @@ from rest_framework.response import Response
 from .models import Contact, Link, Sublink, About, Event, Announcement, Team, Member, Blog, Subscribe, Message
 from django.core.mail import send_mail
 from django.conf import settings
+from django.template.loader import render_to_string
+from django.contrib.sites.models import Site
 
 #ibo was here
 
@@ -211,7 +213,6 @@ def email(request):
     if not user_mail:
         return Response({"error": "Email is required."}, status=status.HTTP_400_BAD_REQUEST)
 
-    # Save email to the database
     subscribe = Subscribe(mail=user_mail)
     subscribe.save()
 
@@ -234,30 +235,47 @@ def contact(request):
     contact.save()
     return Response({"success": "Email has been successfully subscribed."}, status=status.HTTP_201_CREATED)
 
-from django.conf import settings
-from django.core.mail import send_mail
-from .models import Subscribe, Message
 
-def mail_sender(message_id=None):
+import base64
 
+def mail_sender(request=None, message_id=None):
     emails = Subscribe.objects.all()
-    user_emails = [mail_.mail for mail_ in emails] 
+    user_emails = [mail_.mail for mail_ in emails]
 
     try:
         if message_id:
             message_obj = Message.objects.get(id=message_id)
         else:
-            message_obj = Message.objects.latest('id')  
+            message_obj = Message.objects.latest('id')
     except Message.DoesNotExist:
         print("Message not found.")
         return  
-    
+
     subject = message_obj.subject
-    message = message_obj.message  
+    message_text = message_obj.message
+    title = message_obj.title
+    sub_title = message_obj.sub_title
+
+    # Convert image to Base64
+    image_data = ""
+    if message_obj.image:
+        image_path = message_obj.image.path
+        with open(image_path, "rb") as img_file:
+            image_data = base64.b64encode(img_file.read()).decode('utf-8')
+    
+    # Embed Base64 image in the HTML content
+    html_message = render_to_string('index.html', {
+        'subject': subject,
+        'title': title,
+        'sub_title': sub_title,
+        'message': message_text,
+        'image_data': image_data,
+    })
 
     send_mail(
         subject=subject,
-        message=message,
+        message=message_text,
         from_email=settings.EMAIL_HOST_USER,
-        recipient_list=user_emails
+        recipient_list=user_emails,
+        html_message=html_message
     )

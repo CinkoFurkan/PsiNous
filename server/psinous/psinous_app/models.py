@@ -121,4 +121,7 @@ class Contact(models.Model):
 class Message(models.Model):
     id = models.AutoField(primary_key=True)
     subject = models.TextField()
+    title = models.CharField(max_length=255, blank=True, null=True)
+    sub_title= models.CharField(max_length=255, blank=True, null=True)
     message = models.TextField()
+    image = models.ImageField(upload_to="message/", blank=True, null=True)

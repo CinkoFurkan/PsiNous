@@ -32,13 +32,12 @@ class ContactAdmin(admin.ModelAdmin):
 @admin.action(description="Send email to all subscribers")
 def send_email_to_subscribers(modeladmin, request, queryset):
     mail_sender()
-    modeladmin.message_user(request, "Emails have been sent successfully.")
+    modeladmin.message_user(request, "Emails sent successfully!")
 
 class SubscribeAdmin(admin.ModelAdmin):
-    list_display = ("mail",)  # Assuming you have an 'email' field in Subscribe model
-    actions = [send_email_to_subscribers]  # Register the action here
+    list_display = ("mail",)  
+    actions = [send_email_to_subscribers]  
 
-# Registering models with admin site
 admin.site.register(Link, LinkAdmin)
 admin.site.register(Sublink, SublinkAdmin)
 admin.site.register(About, AboutAdmin)
