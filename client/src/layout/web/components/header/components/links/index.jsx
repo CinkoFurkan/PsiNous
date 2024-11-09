@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import useMedia from "../../../../hooks/use-media";
+import useMedia from "../../../../../../hooks/use-media";
 import ResponsiveLinks from "../responsive-links";
 
 const Links = ({ links }) => {

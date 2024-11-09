@@ -1,4 +1,3 @@
-import React from 'react';
 import useFetch from '../../hooks/get';
 import TopAbout from "./components/top-about";
 import ReverseRowAbout from "./components/reverse-row-about";

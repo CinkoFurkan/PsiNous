@@ -1,4 +1,4 @@
-import WLogo from "../../../../assets/img/WLogo.png"
+import WLogo from "../../../../../../assets/img/WLogo.png"
 
 const Logo = () => {
   return (

@@ -1,9 +1,9 @@
-import useFetch from "../../hooks/get";
+import useFetch from "../../../../hooks/get";
 import TranslateButton from "./components/translateButton";
 import Links from "./components/links";
 import Logo from "./components/logo";
 import Social from "./components/social";
-import useMedia from "../../hooks/use-media";
+import useMedia from "../../../../hooks/use-media";
 
 const Header = () => {
   const { data: links } = useFetch("/link/");
