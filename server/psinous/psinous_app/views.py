@@ -4,9 +4,11 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Contact, Link, Sublink, About, Event, Announcement, Team, Member, Blog, Subscribe, Message
 from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.contrib.sites.models import Site
+import base64
 
 #ibo was here
 
@@ -236,8 +238,6 @@ def contact(request):
     return Response({"success": "Email has been successfully subscribed."}, status=status.HTTP_201_CREATED)
 
 
-import base64
-
 def mail_sender(request=None, message_id=None):
     emails = Subscribe.objects.all()
     user_emails = [mail_.mail for mail_ in emails]
@@ -256,14 +256,12 @@ def mail_sender(request=None, message_id=None):
     title = message_obj.title
     sub_title = message_obj.sub_title
 
-    # Convert image to Base64
     image_data = ""
     if message_obj.image:
         image_path = message_obj.image.path
         with open(image_path, "rb") as img_file:
             image_data = base64.b64encode(img_file.read()).decode('utf-8')
     
-    # Embed Base64 image in the HTML content
     html_message = render_to_string('index.html', {
         'subject': subject,
         'title': title,
@@ -272,10 +270,16 @@ def mail_sender(request=None, message_id=None):
         'image_data': image_data,
     })
 
-    send_mail(
+    from_email = "PsiNous Öğrenci Topluluğu <{}>".format(settings.EMAIL_HOST_USER)
+
+    email = EmailMessage(
         subject=subject,
-        message=message_text,
-        from_email=settings.EMAIL_HOST_USER,
-        recipient_list=user_emails,
-        html_message=html_message
+        body=html_message,
+        from_email=from_email,
+        to=[settings.EMAIL_HOST_USER], 
+        bcc=user_emails  
     )
+    
+    email.content_subtype = "html"
+
+    email.send()
