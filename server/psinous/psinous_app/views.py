@@ -187,6 +187,8 @@ def blog_detail(request, id=None):
                 "created_at": blog.created_at,
                 "updated_at": blog.updated_at,
                 "is_published": blog.is_published,
+                "views_count": blog.views_count,  
+                "likes_count": blog.likes_count,
                 "image": blog.image.url if blog.image else None
             }
         }
@@ -204,6 +206,8 @@ def blog_detail(request, id=None):
                 "created_at": i.created_at,
                 "updated_at": i.updated_at,
                 "is_published": i.is_published,
+                "views_count": i.views_count, 
+                "likes_count": i.likes_count,
                 "image": i.image.url if i.image else None
             } for i in blogs]
         }
@@ -283,3 +287,21 @@ def mail_sender(request=None, message_id=None):
     email.content_subtype = "html"
 
     email.send()
+
+@api_view(['PUT'])
+def like_view(request):
+    new_like =  request.data.get('new_like')
+    new_view =  request.data.get('new_view')
+    blog_id =  request.data.get('id')
+    try:
+        blog = Blog.objects.get(id=blog_id)
+    except:
+        return Response({"message": "Blog not found."}, status=status.HTTP_404_NOT_FOUND)
+
+    blog.likes_count = new_like
+    blog.views_count = new_view
+
+    blog.save()
+    return Response({"message": "Blog updated successfully."}, status=200)
+
+ 

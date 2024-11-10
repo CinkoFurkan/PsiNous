@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function ReverseRowAbout({otherAboutSections}) {
     return (
         <div className='ml-0'>

@@ -24,6 +24,7 @@ class MemberAdmin(admin.ModelAdmin):
     list_display = ("first_name", "title", "team")
 
 class BlogAdmin(admin.ModelAdmin):
+    readonly_fields = ('views_count', 'likes_count')
     list_display = ("title", "writer", "is_published")
 
 class ContactAdmin(admin.ModelAdmin):

@@ -158,6 +158,9 @@ JAZZMIN_SETTINGS = {
     "site_title": "Psinous Admin",
     "site_brand": "PsiNous",
     "show_ui_builder": False,
+    "welcome_sign": "Psinous Admin Page",
+    "copyright": "IT Birimi",
+    
     
 }
 

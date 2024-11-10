@@ -98,6 +98,8 @@ class Blog(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=True)
     image = models.ImageField(upload_to='blogs/', blank=True, null=True)
+    views_count = models.PositiveIntegerField(default=0) 
+    likes_count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.title

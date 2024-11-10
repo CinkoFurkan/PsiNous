@@ -1,11 +1,10 @@
 import {AiFillLike} from "react-icons/ai";
 import {FaEye} from "react-icons/fa";
 
-export default function LikesViews({data}) {
+export default function LikesViews({data , incremenetLikes}) {
     return (
         <div className="flex space-x-6">
-              <span
-                    className="flex items-center cursor-pointer transition-colors duration-300">
+              <span onClick={incremenetLikes} className="flex items-center cursor-pointer transition-colors duration-300">
                 <AiFillLike className="text-gray-600 hover:text-blue-700 text-lg mr-1"/>
                 <span className="font-semibold">
                   {data.blogs?.likes || 0} Likes

@@ -3,6 +3,10 @@ import Image from "./components/image";
 import Info from "./components/info";
 import Extra from "./components/extra";
 import { motion } from "framer-motion";
+import {setBlogs} from "../../store/blog/actions/actions";
+import {useBlogs} from "../../store/hooks/hooks";
+import {useEffect} from "react";
+import blog from "../home/components/blog";
 
 const container = {
   visible: {
@@ -11,7 +15,6 @@ const container = {
     },
   },
 };
-
 const item = {
   hidden: {
     opacity: 0,
@@ -24,7 +27,14 @@ const item = {
 };
 
 const Blog = () => {
-  const { data } = useFetch(`blog/`);
+  const { data } = useFetch(`blog`);
+  const blogs = useBlogs()
+
+  useEffect(() => {
+    if(data){
+      setBlogs(data.blogs)
+    }
+  }, [data]);
 
   return data && data.blogs ? (
     <motion.div

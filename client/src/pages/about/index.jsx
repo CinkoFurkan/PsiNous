@@ -5,9 +5,10 @@ import BottomAbout from "./components/bottom-about";
 import {motion} from "framer-motion";
 
 const About = () => {
-    const {data: aboutData} = useFetch('/about');
+    const {data: aboutData} = useFetch('about');
     const aboutSections = aboutData?.about || [];
     const otherAboutSections = aboutData?.about?.slice(2, 4) || [];
+    console.log(aboutSections)
 
     return (
         <motion.div initial={{opacity: 0}} animate={{opacity: 1}}>
@@ -18,7 +19,7 @@ const About = () => {
 
                         <ReverseRowAbout otherAboutSections={otherAboutSections}/>
 
-                        <BottomAbout aboutSections={aboutSections}/>
+                        <BottomAbout aboutSections={aboutSections} />
                     </div>
                 </div>
             </section>
