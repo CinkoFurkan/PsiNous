@@ -6,17 +6,19 @@ import Body from "./components/body";
 import BlogWriter from "./components/blog-writer";
 import LikesViews from "./components/likes-views";
 import {motion} from "framer-motion";
-import {setLikes} from "../../../../store/blog/actions/actions";
-import {useCallback} from "react";
-
+import {setBlogs, setLikes} from "../../../../store/blog/actions/actions";
+import {useCallback, useEffect} from "react";
+import {increaceLikesAPI} from "../../../../store/blog/api/api";
+import {useBlogs} from "../../../../store/hooks/hooks";
 
 export default function BlogDetails() {
-    const {id} = useParams();
-    const {data} = useFetch(`blog/${id}`);
+    const {id: blogID} = useParams();
+    const {data} = useFetch(`blog/${blogID}`);
 
-    const incremenetLikes = useCallback(async (id) => {
-        setLikes(id)
-    })
+    const incremenetLikes = async (id, newLike, newViews) => {
+        await increaceLikesAPI(id, newLike, newViews);
+    };
+
 
     return (
         <motion.div initial={{opacity: 0}} animate={{opacity: 1}}
@@ -29,7 +31,7 @@ export default function BlogDetails() {
 
                     <footer className="mt-10 flex justify-between items-center text-gray-700 text-sm border-t pt-4">
                         <BlogWriter data={data}/>
-                        <LikesViews data={data} incremenetLikes={incremenetLikes}/>
+                        <LikesViews data={data} incremenetLikes={incremenetLikes} blogID={blogID}/>
                     </footer>
                 </div>
             </div>

@@ -1,11 +1,14 @@
-import {setLikes} from "../actions/actions";
 import axios from "axios";
+import {setLikes} from "../actions/actions";
 
-export const increaseLike = async(id) => {
+
+const increaceLikesAPI = async (id, newLike, newViews) => {
     try {
-        const { data } = await axios.put("")
-        setLikes(data.blogs.id)
-    }catch (error) {
-        console.error(error.message);
+        const {data} = await axios.put("/psinous_app/api/like_view/", {id, new_like: newLike, new_view: newViews})
+        setLikes(id)
+    } catch (error) {
+        console.log(error.message)
     }
 }
+
+export {increaceLikesAPI}

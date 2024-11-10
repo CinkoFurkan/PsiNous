@@ -11,15 +11,15 @@ const blog = createSlice({
             state.blogs = action.payload
         },
         _setViews: (state, action) => {
-            const blogViews = state.blogs.find((blog) => blog.id === action.payload);
+            const blogViews = state.blogs.find((blog) => blog.blog_id === action.payload);
             if (blogViews) {
-                blogViews.views += 1
+                blogViews.likes_count += 1
             }
         },
         _setLike: (state, action) => {
-            const blogLikes = state.blogs.find((blog) => blog.id === action.payload);
+            const blogLikes = state.blogs?.find((blog) => blog.blog_id === action.payload);
             if (blogLikes) {
-                blogLikes.likes += 1
+                blogLikes.likes_count += 1
             }
         }
     }

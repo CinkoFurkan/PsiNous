@@ -165,6 +165,8 @@ def blog(request):
                 "created_at": i.created_at,
                 "updated_at": i.updated_at,
                 "is_published": i.is_published,
+                "views_count": i.views_count,
+                 "likes_count": i.likes_count,
                 "image": i.image.url if i.image else None
             } for i in blogs]
         }
