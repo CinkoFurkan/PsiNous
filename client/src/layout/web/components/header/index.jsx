@@ -16,7 +16,6 @@ const Header = () => {
       {!isMobile && (
         <div className="flex items-center space-x-12">
           <Social />
-          <TranslateButton />
         </div>
       )}
     </header>
