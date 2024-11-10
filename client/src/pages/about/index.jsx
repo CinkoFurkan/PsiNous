@@ -2,6 +2,7 @@ import useFetch from '../../hooks/get';
 import TopAbout from "./components/top-about";
 import ReverseRowAbout from "./components/reverse-row-about";
 import BottomAbout from "./components/bottom-about";
+import {motion} from "framer-motion";
 
 const About = () => {
     const {data: aboutData} = useFetch('/about');
@@ -9,11 +10,10 @@ const About = () => {
     const otherAboutSections = aboutData?.about?.slice(2, 4) || [];
 
     return (
-        <div>
+        <motion.div initial={{opacity: 0}} animate={{opacity: 1}}>
             <section>
                 <div className='py-8 text-black'>
-                    <div className='container mx-auto my-12 flex flex-col md:flex-row'>
-
+                    <div className='container mx-auto my-12 flex flex-col text-center'>
                         <TopAbout aboutSections={aboutSections}/>
 
                         <ReverseRowAbout otherAboutSections={otherAboutSections}/>
@@ -22,7 +22,7 @@ const About = () => {
                     </div>
                 </div>
             </section>
-        </div>
+        </motion.div>
     );
 };
 

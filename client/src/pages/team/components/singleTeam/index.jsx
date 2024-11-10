@@ -26,7 +26,6 @@ const SingleTeam = ({ title, members }) => {
   const navigate = useNavigate();
 
   const handleMemberClick = (id) => {
-    console.log("Navigating to member with ID:", id);
     navigate(`/member/${id}`);
   };
 

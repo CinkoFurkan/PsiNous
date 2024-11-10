@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  background-color: #f4efe6;
+  height: 100%;
+  margin: 0;
+}
+
 .flip-card {
     background-color: transparent;
     width: 300px; 

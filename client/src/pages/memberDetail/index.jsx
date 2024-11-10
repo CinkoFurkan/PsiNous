@@ -4,12 +4,15 @@ import Image from "./components/image";
 import UserInfo from "./components/user-info";
 import Biograhpy from "./components/biograhpy";
 import Contact from "./components/contact";
+import {useLoading} from "../../store/hooks/hooks";
 
 const MemberDetail = () => {
     const {id} = useParams();
     const {data} = useFetch(`member/${id}`);
+    const loading = useLoading()
 
-    if (!data?.member) {
+
+    if (loading > 0 || !data?.member) {
         return <div>Loading...</div>;
     }
 
